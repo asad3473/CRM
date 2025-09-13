@@ -12,13 +12,30 @@ export default function App() {
       </div>
     )
   }
+  const HQLayout=()=>{
+    return(
+      <div className='flex '>
+        <SideBar/>
+        <Outlet/>
+      </div>
+    )
+  }
 
   const router=createBrowserRouter([
     {
       path:'/',
       element:<AdminLayout/>,
       children:[
-        
+          {
+            
+          }
+      ]
+    },
+    {
+      path:'/',
+      element:<HQLayout/>,
+      children:[
+      
       ]
     }
   ])
