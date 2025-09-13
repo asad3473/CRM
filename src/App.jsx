@@ -3,6 +3,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import './app.css'
 import SideBar from './AdminDashboard/Pages/SideBar'
 import HQDashboard from './HQDashboard/Pages/HQDashboard'
+import Dashboard from './AdminDashboard/Pages/Dashboard'
 export default function App() {
 
   const AdminLayout=()=>{
@@ -28,7 +29,7 @@ export default function App() {
       element:<AdminLayout/>,
       children:[
           {
-            
+            path:"/dashboard",element:<Dashboard/>,
           }
       ]
     },
