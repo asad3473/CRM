@@ -1,4 +1,4 @@
-// AnalyticsReports.jsx
+
 import React from "react";
 import {
   BarChart, Bar, LineChart, Line, PieChart, Pie, Cell,
@@ -7,7 +7,6 @@ import {
 
 const COLORS = ["#1E90FF", "#22C55E", "#F59E0B", "#EF4444", "#06B6D4"];
 
-// Dummy Data
 const branchData = [
   { branch: "HQ", cars: 320, revenue: 150000, csat: 88 },
   { branch: "Branch A", cars: 200, revenue: 92000, csat: 82 },
@@ -97,8 +96,6 @@ export default function AnalyticsReports() {
           </LineChart>
         </ResponsiveContainer>
       </div>
-
-      {/* 3. Service Reports */}
       <div className="bg-white p-4 rounded-lg shadow space-y-4">
         <h2 className="font-semibold">Service Reports</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
