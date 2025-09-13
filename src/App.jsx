@@ -1,7 +1,8 @@
 
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import './app.css'
-import SideBar from './Dashboard/Pages/SideBar'
+import SideBar from './AdminDashboard/Pages/SideBar'
+import HQDashboard from './HQDashboard/Pages/HQDashboard'
 export default function App() {
 
   const AdminLayout=()=>{
@@ -35,7 +36,9 @@ export default function App() {
       path:'/',
       element:<HQLayout/>,
       children:[
-      
+        {
+          path:'/',element:<HQDashboard/>
+        }
       ]
     }
   ])
