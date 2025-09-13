@@ -1,11 +1,11 @@
-
 import React from "react";
 import {
   BarChart, Bar, LineChart, Line, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from "recharts";
 
-const COLORS = ["#1E90FF", "#22C55E", "#F59E0B", "#EF4444", "#06B6D4"];
+// Updated Color Palette (Blue + Green Theme)
+const COLORS = ["#1C0B7E", "#00C04D", "#008537", "#34D399", "#93C5FD"];
 
 const branchData = [
   { branch: "HQ", cars: 320, revenue: 150000, csat: 88 },
@@ -48,11 +48,11 @@ const marketingData = [
 
 export default function AnalyticsReports() {
   return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Analytics & Reports / التحليلات والتقارير</h1>
+    <div className="p-6 space-y-6 ">
+      <h1 className="text-2xl font-bold">Service Analytics & Reports</h1>
 
       {/* 1. Branch Reports */}
-      <div className="bg-white p-4 rounded-lg shadow space-y-4">
+      <div className="bg-white text-gray-800 p-4 rounded-lg shadow space-y-4">
         <h2 className="font-semibold">Branch Reports</h2>
         <ResponsiveContainer width="100%" height={250}>
           <BarChart data={branchData}>
@@ -61,26 +61,32 @@ export default function AnalyticsReports() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="cars" fill="#1E90FF" name="Cars Serviced" />
-            <Bar dataKey="revenue" fill="#22C55E" name="Revenue" />
+            <Bar dataKey="cars" fill="#1C0B7E" name="Cars Serviced" />
+            <Bar dataKey="revenue" fill="url(#greenGradient)" name="Revenue" />
+            <defs>
+              <linearGradient id="greenGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#00C04D" />
+                <stop offset="100%" stopColor="#008537" />
+              </linearGradient>
+            </defs>
           </BarChart>
         </ResponsiveContainer>
       </div>
 
       {/* 2. HQ Reports */}
-      <div className="bg-white p-4 rounded-lg shadow space-y-4">
+      <div className="bg-white text-gray-800 p-4 rounded-lg shadow space-y-4">
         <h2 className="font-semibold">HQ Reports</h2>
         <div className="grid grid-cols-3 gap-4">
-          <div className="p-3 border rounded">
-            <div className="text-sm text-gray-500">Total Cars</div>
+          <div className="p-3 border rounded bg-[#1C0B7E] text-white">
+            <div className="text-sm">Total Cars</div>
             <div className="text-xl font-bold">670</div>
           </div>
-          <div className="p-3 border rounded">
-            <div className="text-sm text-gray-500">Total Revenue</div>
+          <div className="p-3 border rounded bg-[#00C04D] text-white">
+            <div className="text-sm">Total Revenue</div>
             <div className="text-xl font-bold">$310,000</div>
           </div>
-          <div className="p-3 border rounded">
-            <div className="text-sm text-gray-500">Avg. CSAT</div>
+          <div className="p-3 border rounded bg-[#008537] text-white">
+            <div className="text-sm">Avg. CSAT</div>
             <div className="text-xl font-bold">83%</div>
           </div>
         </div>
@@ -91,12 +97,14 @@ export default function AnalyticsReports() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="cars" stroke="#1E90FF" />
-            <Line type="monotone" dataKey="revenue" stroke="#22C55E" />
+            <Line type="monotone" dataKey="cars" stroke="#1C0B7E" strokeWidth={2} />
+            <Line type="monotone" dataKey="revenue" stroke="#00C04D" strokeWidth={2} />
           </LineChart>
         </ResponsiveContainer>
       </div>
-      <div className="bg-white p-4 rounded-lg shadow space-y-4">
+
+      {/* 3. Service Reports */}
+      <div className="bg-white text-gray-800 p-4 rounded-lg shadow space-y-4">
         <h2 className="font-semibold">Service Reports</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <ResponsiveContainer width="100%" height={250}>
@@ -136,15 +144,15 @@ export default function AnalyticsReports() {
       </div>
 
       {/* 4. Feedback Reports */}
-      <div className="bg-white p-4 rounded-lg shadow space-y-4">
+      <div className="bg-white text-gray-800 p-4 rounded-lg shadow space-y-4">
         <h2 className="font-semibold">Feedback Reports</h2>
         <div className="grid grid-cols-2 gap-4">
-          <div className="p-3 border rounded">
-            <div className="text-sm text-gray-500">CSAT</div>
+          <div className="p-3 border rounded bg-[#1C0B7E] text-white">
+            <div className="text-sm">CSAT</div>
             <div className="text-xl font-bold">{feedbackStats.csat}%</div>
           </div>
-          <div className="p-3 border rounded">
-            <div className="text-sm text-gray-500">NPS</div>
+          <div className="p-3 border rounded bg-[#00C04D] text-white">
+            <div className="text-sm">NPS</div>
             <div className="text-xl font-bold">{feedbackStats.nps}</div>
           </div>
         </div>
@@ -169,7 +177,7 @@ export default function AnalyticsReports() {
       </div>
 
       {/* 5. Marketing Reports */}
-      <div className="bg-white p-4 rounded-lg shadow space-y-4">
+      <div className="bg-white text-gray-800 p-4 rounded-lg shadow space-y-4">
         <h2 className="font-semibold">Marketing Reports</h2>
         <ResponsiveContainer width="100%" height={250}>
           <BarChart data={marketingData}>
@@ -178,20 +186,21 @@ export default function AnalyticsReports() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="reach" fill="#1E90FF" />
-            <Bar dataKey="conversions" fill="#22C55E" />
+            <Bar dataKey="reach" fill="#1C0B7E" />
+            <Bar dataKey="conversions" fill="#00C04D" />
           </BarChart>
         </ResponsiveContainer>
       </div>
 
       {/* 6. Export Options */}
-      <div className="bg-white p-4 rounded-lg shadow">
+      <div className="bg-white text-gray-800 p-4 rounded-lg shadow">
         <h2 className="font-semibold mb-2">Export Options</h2>
         <div className="flex gap-3">
-          <button className="bg-blue-600 text-white px-4 py-2 rounded">Export PDF</button>
-          <button className="bg-green-600 text-white px-4 py-2 rounded">Export Excel</button>
+          <button className="bg-[#1C0B7E] text-white px-4 py-2 rounded">Export PDF</button>
+          <button className="bg-[#00C04D] text-white px-4 py-2 rounded">Export Excel</button>
         </div>
       </div>
     </div>
   );
 }
+  

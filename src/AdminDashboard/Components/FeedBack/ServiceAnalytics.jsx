@@ -37,43 +37,48 @@ const carModelServices = [
   { model: "Hyundai Elantra", oilChange: 90, repairs: 35, maintenance: 55 },
 ];
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const COLORS = ["#00C04D", "#008537", "#FFD700", "#FF8042"];
 
 const ServiceAnalytics = () => {
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 min-h-screen">
       {/* Title */}
-      <h1 className="text-2xl font-bold text-gray-800 mb-4">
-        Service Analytics / تحليلات الخدمات
+      <h1 className="text-3xl font-bold  mb-6">
+        Service Analytics 
       </h1>
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white shadow-md rounded-xl p-4">
-          <h2 className="text-sm text-gray-500">Total Services Completed</h2>
-          <p className="text-xl font-bold">1,200</p>
-        </div>
-        <div className="bg-white shadow-md rounded-xl p-4">
-          <h2 className="text-sm text-gray-500">Most Popular Service</h2>
-          <p className="text-xl font-bold">Oil Change</p>
-        </div>
-        <div className="bg-white shadow-md rounded-xl p-4">
-          <h2 className="text-sm text-gray-500">Avg. Service Duration</h2>
-          <p className="text-xl font-bold">45 mins</p>
-        </div>
-        <div className="bg-white shadow-md rounded-xl p-4">
-          <h2 className="text-sm text-gray-500">Avg. Customer Rating</h2>
-          <p className="text-xl font-bold">4.5 ⭐</p>
-        </div>
+        {[
+          { label: "Total Services Completed", value: "1,200" },
+          { label: "Most Popular Service", value: "Oil Change" },
+          { label: "Avg. Service Duration", value: "45 mins" },
+          { label: "Avg. Customer Rating", value: "4.5 ⭐" },
+        ].map((card, idx) => (
+          <div
+            key={idx}
+            className="bg-white shadow-md rounded-xl p-4 border-[#1C0B7E] border-t-4"
+            
+          >
+            <h2 className="text-sm text-gray-500">{card.label}</h2>
+            <p className="text-xl font-bold text-gray-900">{card.value}</p>
+          </div>
+        ))}
       </div>
 
       {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Service Breakdown (Pie Chart) */}
         <div className="bg-white shadow-md rounded-xl p-6">
-          <h2 className="text-lg font-semibold mb-4">Service Breakdown</h2>
+          <h2 className="text-lg font-semibold mb-4 text-gray-800">Service Breakdown</h2>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
+              <defs>
+                <linearGradient id="greenGradient" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#00C04D" />
+                  <stop offset="100%" stopColor="#008537" />
+                </linearGradient>
+              </defs>
               <Pie
                 data={serviceBreakdown}
                 cx="50%"
@@ -85,7 +90,7 @@ const ServiceAnalytics = () => {
                 {serviceBreakdown.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
+                    fill={index === 0 ? "url(#greenGradient)" : COLORS[index % COLORS.length]}
                   />
                 ))}
               </Pie>
@@ -96,19 +101,26 @@ const ServiceAnalytics = () => {
 
         {/* Trends Over Time (Line Chart) */}
         <div className="bg-white shadow-md rounded-xl p-6">
-          <h2 className="text-lg font-semibold mb-4">Service Trends</h2>
+          <h2 className="text-lg font-semibold mb-4 text-gray-800">Service Trends</h2>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={serviceTrends}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="month" />
-              <YAxis />
+              <defs>
+                <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#00C04D" />
+                  <stop offset="100%" stopColor="#008537" />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+              <XAxis dataKey="month" stroke="#374151" />
+              <YAxis stroke="#374151" />
               <Tooltip />
               <Legend />
               <Line
                 type="monotone"
                 dataKey="services"
-                stroke="#0088FE"
-                strokeWidth={2}
+                stroke="url(#lineGradient)"
+                strokeWidth={3}
+                dot={{ r: 5, fill: "#00C04D" }}
               />
             </LineChart>
           </ResponsiveContainer>
@@ -117,10 +129,10 @@ const ServiceAnalytics = () => {
 
       {/* Car Model vs Service Table */}
       <div className="bg-white shadow-md rounded-xl p-6 overflow-x-auto">
-        <h2 className="text-lg font-semibold mb-4">Car Model vs. Services</h2>
-        <table className="w-full text-left border-collapse">
+        <h2 className="text-lg font-semibold mb-4 text-gray-800">Car Model vs. Services</h2>
+        <table className="w-full text-left border-collapse rounded-lg overflow-hidden">
           <thead>
-            <tr className="bg-gray-100 text-gray-700">
+            <tr  className="bg-[#1C0B7E] text-white">
               <th className="p-2">Car Model</th>
               <th className="p-2">Oil Change</th>
               <th className="p-2">Repairs</th>
@@ -129,7 +141,7 @@ const ServiceAnalytics = () => {
           </thead>
           <tbody>
             {carModelServices.map((row, index) => (
-              <tr key={index} className="border-b">
+              <tr key={index} className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:bg-green-50 transition`}>
                 <td className="p-2">{row.model}</td>
                 <td className="p-2">{row.oilChange}</td>
                 <td className="p-2">{row.repairs}</td>
@@ -142,10 +154,10 @@ const ServiceAnalytics = () => {
 
       {/* Workflow Time Analysis */}
       <div className="bg-white shadow-md rounded-xl p-6">
-        <h2 className="text-lg font-semibold mb-4">Workflow Time Analysis</h2>
+        <h2 className="text-lg font-semibold mb-4 text-gray-800">Workflow Time Analysis</h2>
         <p className="text-gray-600">
           Average duration from scheduling to completion:{" "}
-          <span className="font-semibold">45 minutes</span>.
+          <span className="font-semibold text-green-700">45 minutes</span>.
         </p>
         <ul className="list-disc list-inside mt-2 text-gray-700">
           <li>Scheduled → In Progress: 15 mins</li>
