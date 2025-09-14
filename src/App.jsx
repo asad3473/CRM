@@ -29,12 +29,12 @@ export default function App() {
       path:'/',
       element:<AdminLayout/>,
       children:[
-          {
+        {
             path:"/dashboard",element:<Dashboard/>,
-          },
-          {
+        },
+        {
             path:"/dashboard/marketing",element:<Marketing/>,
-          },
+        },
       ]
     },
     {
