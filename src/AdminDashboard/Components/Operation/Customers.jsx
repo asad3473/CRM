@@ -3,11 +3,64 @@ import React, { useMemo, useState, useEffect } from "react";
 const BR = [{ id: "DXB", name: "Dubai" }, { id: "AUH", name: "Abu Dhabi" }, { id: "SHJ", name: "Sharjah" }];
 const TAGS = ["VIP", "Lost", "WarrantyExpired", "HighValue", "New"];
 const seed = [
-    { id: "1", first: "Ahmed", last: "Khan", phone: "+971501234567", email: "ahmed.k@example.com", lang: "ar", branch: "DXB", tags: ["VIP"], cars: [{ p: "A-12345", m: "Camry", y: 2021 }], last: "2025-08-14", csat: 5 },
-    { id: "2", first: "Maya", last: "Singh", phone: "+971507654321", email: "maya.s@example.com", lang: "en", branch: "AUH", tags: ["New"], cars: [{ p: "H-77821", m: "Civic", y: 2019 }], last: "2025-07-30", csat: 4 },
-    { id: "3", first: "Omar", last: "Hassan", phone: "+971504443333", email: "omar.h@example.com", lang: "ar", branch: "DXB", tags: ["WarrantyExpired"], cars: [{ p: "B-33112", m: "Patrol", y: 2018 }], last: "2025-06-01", csat: 2 },
-    { id: "4", first: "Omar", last: "Hassan", phone: "+971504443333", email: "omar.h@example.com", lang: "ar", branch: "DXB", tags: ["VIP"], cars: [{ p: "B-33112", m: "Patrol", y: 2018 }], last: "2025-06-01", csat: 2 }
+  { 
+    id: "1", 
+    first: "Ahmed", 
+    lastName: "Khan",             // ✅ surname
+    phone: "+971501234567", 
+    email: "ahmed.k@example.com", 
+    lang: "ar", 
+    branch: "DXB", 
+    tags: ["VIP"], 
+    cars: [{ p: "A-12345", m: "Camry", y: 2021 }], 
+    lastVisit: "2025-08-14",      // ✅ last service date
+    csat: 5 
+  },
+  { 
+    id: "2", 
+    first: "Maya", 
+    lastName: "Singh", 
+    phone: "+971507654321", 
+    email: "maya.s@example.com", 
+    lang: "en", 
+    branch: "AUH", 
+    tags: ["New"], 
+    cars: [{ p: "H-77821", m: "Civic", y: 2019 }], 
+    lastVisit: "2025-07-30", 
+    csat: 4 
+  },
+  { 
+    id: "3", 
+    first: "Omar", 
+    lastName: "Hassan", 
+    phone: "+971504443333", 
+    email: "omar.h@example.com", 
+    lang: "ar", 
+    branch: "DXB", 
+    tags: ["WarrantyExpired"], 
+    cars: [{ p: "B-33112", m: "Patrol", y: 2018 }], 
+    lastVisit: "2025-06-01", 
+    csat: 2 
+  },
+  { 
+    id: "4", 
+    first: "Omar", 
+    lastName: "Hassan", 
+    phone: "+971504443333", 
+    email: "omar.h@example.com", 
+    lang: "ar", 
+    branch: "DXB", 
+    tags: ["VIP"], 
+    cars: [{ p: "B-33112", m: "Patrol", y: 2018 }], 
+    lastVisit: "2025-06-01", 
+    csat: 2 
+  }
 ];
+
+
+
+
+
 
 const Badge = ({ tone = "tag", children }) => (
     <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-medium ring-1 transition
@@ -152,7 +205,20 @@ export default function Customers() {
 }
 
 function Form({ initial, onSave, onCancel }) {
-    const [f, setF] = useState(initial || { first: "", last: "", phone: "", email: "", lang: "en", branch: "DXB", tags: [], cars: [], last: new Date().toISOString().slice(0, 10), csat: 5, id: initial?.id });
+    const [f, setF] = useState(initial || {
+  first: "",
+  lastName: "",                       // ✅ surname
+  phone: "",
+  email: "",
+  lang: "en",
+  branch: "DXB",
+  tags: [],
+  cars: [],
+  lastVisit: new Date().toISOString().slice(0, 10),  // ✅ service date
+  csat: 5,
+  id: initial?.id
+});
+
     const addCar = () => setF(v => ({ ...v, cars: [...v.cars, { p: "", m: "", y: new Date().getFullYear() }] }));
     return (<form onSubmit={e => { e.preventDefault(); onSave(f) }} className="space-y-3">
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">

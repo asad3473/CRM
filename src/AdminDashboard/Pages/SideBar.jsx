@@ -117,7 +117,7 @@
                   <div>
                     <button
                       onClick={() => toggleDropdown(val.title)}
-                      className={`w-full flex justify-between items-center px-4 py-3 rounded-lg transition-all duration-200
+                      className={`w-full flex md:py-2  justify-between items-center px-4 py-1 rounded-lg transition-all duration-200
                         ${activeDropdown === val.title ? 'bg-white text-black' : 'hover:bg-white hover:text-black'}`}
                     >
                       <span className="flex items-center gap-3">
@@ -134,12 +134,12 @@
 
                     {/* Dropdown list */}
                     {activeDropdown === val.title && (
-                      <div className="ml-6 mt-1 mb-2 flex flex-col gap-1 border-l border-gray-600 pl-4 py-1">
+                      <div className="ml-6 mt-1 mb-2 flex flex-col gap-1 border-l border-gray-600 pl-4 md:py-1">
                         {val.dropdown.map((item, i) => (
                           <Link
                             key={i}
                             to={item.link}
-                            className={`py-2 px-3 rounded transition-colors duration-200
+                            className={` md:py-2 px-3 rounded transition-colors duration-200
                               ${location.pathname === item.link ? 'text-blue-300 font-medium' : 'hover:text-blue-400'}`}
                           >
                             {item.title}
@@ -162,7 +162,7 @@
             ))}
 
             {/* Settings at bottom */}
-            <div className="absolute bottom-0 left-0 right-0 border-t border-gray-700 p-4 ">
+            <div className="absolute bottom-0 left-0 right-0 border-t border-gray-700  ">
               <Link
                 to="/settings"
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200

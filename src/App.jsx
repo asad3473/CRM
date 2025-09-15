@@ -20,12 +20,9 @@ export default function App() {
   const AdminLayout = () => {
     return (
       <div className="flex">
-        {/* Sidebar fixed on the left */}
         <div className="fixed top-0 z-40 left-0 h-screen text-white">
           <SideBar />
         </div>
-
-        {/* Right content (scrollable) */}
         <div className="sm:ml-64 flex-1 h-screen overflow-y-auto bg-gray-50 p-4">
           <Outlet />
         </div>
