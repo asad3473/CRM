@@ -1,6 +1,6 @@
 
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
-import './app.css'
+// import './app.css'
 import SideBar from './AdminDashboard/Pages/SideBar'
 import HQoverview from './AdminDashboard/Components/FeedBack/HQoverview'
 import BranchPerformance from './AdminDashboard/Components/FeedBack/BranchPerformance'
